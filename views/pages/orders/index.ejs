@@ -1,0 +1,40 @@
+<%- contentFor('body') %>
+<div class="container"></div>
+  <div class="page-header mb-5 mt-5">
+      <h2 class="title">Meus Pedidos</h2>
+  </div>
+
+  <div class="d-flex mb-1" >
+    <h4>Pedidos Realizados</h4>
+  </div>
+  <table class="table table-borderless table-hover table-responsive-md">
+    <thead class="bg-light">
+      <tr>
+        <th class="py-4">Data</th>
+        <th class="py-4">Total</th>
+        <th class="py-4">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (order of orders){%>
+        <tr onclick="window.location = '/order/<%= order._id %>'">
+          <td class="py-4">
+            <% var formattedDate = ((order.createdAt.getDate() )) + 
+              "/" + ((order.createdAt.getMonth() + 1)) + 
+              "/" + order.createdAt.getFullYear(); 
+            %>
+            <%= formattedDate %>
+          </td>
+          <td class="py-4">
+            <% var total = order.products.reduce((acumulador, product) => {
+                return acumulador += product.price * product.quantity;
+              }, 0)
+            %>
+            R$ <%= total.toFixed(2)%>
+          </td>
+          <td class="py-4"><%= orderStatus.get(order.status) %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

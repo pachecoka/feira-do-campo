@@ -1,0 +1,30 @@
+<%- contentFor('body') %>
+
+<div class="columns is-centered">
+  <div class="container col-md-6 offset-md-3">
+    <h1 class="mb-4 mt-5">Criar Conta</h1>
+    <form action="/register" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="inputFirstName">Nome</label>
+        <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="Digite o seu primeiro nome" required>
+      </div>
+      <div class="form-group">
+        <label for="inputLastName">Sobrenome</label>
+        <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Digite o seu sobrenome" required>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail">E-mail</label>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Digite o seu e-mail" required>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Senha</label>
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Digite uma senha para a conta" required>
+      </div>
+      <div class="form-group">
+        <label for="inputRepeatedPassword">Repita sua senha</label>
+        <input type="password" class="form-control" id="inputRepeatedPassword" name="repeatedPassword" placeholder="Repita a senha para a conta" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<%- contentFor('body') %>
+
+<header class="header">
+    <div class="text-box">
+        <h3 class="heading-primary">
+            <span class="heading-primary-main">Feira do Campo</span>
+            <span class="heading-primary-sub">Conectando o campo à cidade</span>
+        </h3>
+    </div>
+</header>
+
+<div class="container">
+    <div class="page-header mb-5 mt-3 justify-content-center">
+        <h2 class="title text-center">Nossos Produtos</h2>
+    </div>
+</div>
+
+<div class="container"></div>
+<div class="container-fluid mt-2 show-product">
+<div class="row justify-content-center">
+<% for (product of products) { %>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card mb-3 card-home">
+              <a href="/products/<%= product.id %>">
+                <img class="card-img-top img-card-home" src="<%= product.image %>" alt="<%= product.title %>">
+              </a>
+              <div class="card-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <h5 class="card-title"><%= product.title %></h5>
+                  </div>
+                  <div class="row">
+                    <p class="card-text text-right"> R$ <%= product.price%></p>
+                  </div>
+                </div>
+              </div>
+              <footer class="card-footer">
+                <form>
+                  <button id="btn-<%= product.id %>" class="btn btn-success btn-sm btn-block add-to-cart">
+                    Comprar <i class="fas fa-shopping-cart"></i>
+                  </button>
+                  <button style="display:none;" id="btn-add-<%= product.id %>" class="btn btn-primary btn-sm btn-block">
+                    Adicionado! <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </footer>
+            </div>
+        </div>
+
+<% } %>
+</div>
+</div>
+</div>

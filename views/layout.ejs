@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>Feira do Campo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand">
+      <img src="/favicon.png" href="/" height="28" alt="Feira do Campo">
+    </a>
+    <a class="navbar-brand" href="/">Feira do Campo</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+      <div class="navbar-nav">
+        <a href="/" class="nav-item nav-link active">Home</a>
+      </div>
+      <div class="navbar-nav">
+        <form action="/" method="GET" class="form-inline">
+          <div class="form-group">
+            <input type="text" name="search" class="form-control" placeholder="Pesquisar produtos...">
+            <button type="submit" class="btn btn-light"><i class="fas fa-search"></i></button>
+          </div> 
+        </form>
+      </div>
+      <ul class="navbar-nav">
+        <% if (user_global) {%>
+          <div class="dropdown">
+            <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Gerenciar <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% if (user_global.isProdutor) {%>
+                <a href="/products/" class="dropdown-item">Meus Produtos</a>
+                <a href="/order/producer" class="dropdown-item">Minhas Vendas</a>
+              <% } %>
+              <a href="/order/" class="dropdown-item">Meus Pedidos</a>
+              <a href="/user" class="dropdown-item">Meus Dados</a>
+            </div>
+          </div>
+        <% } if (user_global) {%>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">Logout</a>
+          </li>
+        <% } else {%>
+          <li class="nav-item">
+            <a href="/register" class="nav-link">Cadastrar</a>
+          </li>
+          <li class="nav-item">
+            <a href="/login" class="nav-link">Login</a>
+          </li>
+        <% } %>
+        <li>
+          <a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container mt-3">
+
+    <% if(error && error.length > 0){ %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } if(success && success.length > 0){ %>
+      <div class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+    <% } if(info && info.length > 0){ %>
+      <div class="alert alert-info" role="alert">
+        <%= info %>
+      </div>
+    <% } %>
+      
+    <%- body %>
+    </div>
+  </main>
+
+  <!-- <footer class="footer">
+    <div class="container">
+      <p class="text-muted centralizado">&copy; Lovelace | Feira do Campo 2020</p>
+    </div>
+  </footer> -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/index.js"></script>
+</body>
+</html>

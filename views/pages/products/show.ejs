@@ -1,0 +1,29 @@
+<%- contentFor('body') %>
+
+<div class="container-fluid mt-2">
+  <div class="row justify-content-center">
+    <div class="d-flex show-product">
+      <div class="card mb-3 mx-auto">
+        <img class="card-img-top img-card-show" src="<%= product.image %>" alt="<%= product.title %>">
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <h5 class="card-title"><%= product.title %></h5>
+              <div class="col-md h6 mt-1">
+                <p class="card-text text-right"> R$ <%= product.price%></p>
+              </div>
+            </div>
+            <div class="row product-isAvailable-show">
+                <% if (product.isAvailable) {%>
+                 <p class="badge badge-success card-text text-right product-isAvailable-show">Produto disponível</p>
+                <% } else {%>
+                 <p class="badge badge-danger card-text text-right product-isAvailable-show">Produto indisponível</p>
+                <% }%>
+            </div>
+          </div>
+          <p class="card-text text-justify product-description-home"><%= product.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

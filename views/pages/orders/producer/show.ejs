@@ -1,0 +1,72 @@
+<%- contentFor('body') %>
+<div class="container"></div>
+  <div class="page-header mb-5 mt-5">
+      <h2 class="title">Gerenciamento de Vendas</h2>
+  </div>
+
+  <div class="mb-4 col-sm-12" >
+    <p><h4>Informações da venda:</h4></p>
+    <p>Nome do cliente: <%= order.customerFirstName + " " + order.customerLastName %> </p>
+    <p>Contato do cliente: <%= order.customerEmail %> </p>
+    <p>Situação atual do pedido: <b><%= orderStatus.get(order.status) %></b></p>
+  </div>
+
+    <div class="d-flex justify-content-end mb-4" >
+      <%if (order.status == 0) {%>
+      <div class="col-sm-6">
+        <p>Alterar situação do pedido <i class="fas fa-question-circle text-info" data-toggle="popover" data-placement="right"
+        data-content="Clique no botão ao lado para separar o pedido para entrega." ></i></p>
+      </div>
+      <%} %>
+      <div class= "text-right col-sm-6">
+        <form action="/order/<%= order._id %>?_method=PUT" method="POST" >
+          <input hidden value="1" name="status" />
+          <%if (order.status == 0) {%>
+            <button type="submit" class="btn btn-success btn-block">Separar para entrega</button>
+          <%} %>
+        </form>
+      </div>
+  </div>
+
+  <table class="table table-borderless table-striped table-responsive-md">
+    <thead class="bg-light">
+      <tr>
+        <th class="py-4">Produto</th>
+        <th class="py-4">Quantidade</th>
+        <th class="py-4">Preço</th>
+        <th class="py-4">Total Produto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (product of order.products){%>
+        <tr>
+          <td class="py-4"><%= product.title %></td>
+          <td class="py-4"><%= product.quantity %></td>
+          <td class="py-4"><%= product.price %></td>
+          <td class="py-4">
+            <% var total = product.quantity * product.price
+            %>
+            R$ <%= total.toFixed(2)%>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+    <tfoot>
+      <tr class="bg-light">
+        <td></td>
+        <td></td>
+        <td class="font-weight-bold">Total Venda</td>
+        <td class="font-weight-bold">
+          <% var total = order.products.reduce((acumulador, product) => {
+              return acumulador += product.price * product.quantity;
+            }, 0)
+          %>
+          R$ <%= total.toFixed(2)%>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <div>
+    <a href="/order/producer">Voltar</a>
+  </div>
+</div>

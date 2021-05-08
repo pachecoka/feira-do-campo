@@ -1,0 +1,59 @@
+<%- contentFor('body') %>
+<div class="container"></div>
+  <div class="page-header mb-5 mt-5">
+      <h2 class="title">Gerenciamento de Produtos</h2>
+  </div>
+
+  <div class="d-flex mb-1" >
+    <h4>Produtos Cadastrados</h4>
+    <a href="/products/new" class="ml-auto btn btn-success">
+      <i class="fas fa-plus"></i> Adicionar
+    </a>
+  </div>
+  <table class="table table-borderless table-striped table-responsive-md">
+    <thead>
+      <tr class="row">
+        <th class="col-sm-2">Status <i class="fas fa-question-circle text-info" data-toggle="popover" data-placement="right"
+          data-content="Clique no círculo do status para mudar a disponibilidade do produto." ></i></th>
+        <th class="col-sm-4">Nome</th>
+        <th class="col-sm-2">Preço</th>
+        <th class="col-sm-2">Editar</th>
+        <th class="col-sm-2">Deletar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (product of products){%>
+        <tr class="row">
+          <td class="col-sm-2">
+              <form method="POST" action="/products/<%=product.id%>/availability?_method=PUT">
+                <% if (product.isAvailable) {%>
+                <button type="submit" class="btn btn-success dot">
+                </button>
+                <% } else {%>
+                  <button type="submit" class="btn btn-danger dot">
+                  </button>
+                 <% }%>
+              </form>
+          </td>
+          <td class="col-sm-4"><%= product.title %></td>
+          <td class="col-sm-2"><%= product.price %></td>
+          <td class="col-sm-2 align-text-center">
+            <a href="/products/<%=product.id%>/edit">
+              <button class="btn btn-primary">
+                <i class="far fa-edit"></i> Editar
+              </button>
+            </a>
+          </td>
+          <td class="col-sm-2">
+            <form action="/products/<%=product.id%>?_method=DELETE" method="POST">
+              <button class="btn btn-danger">
+                <i class="far fa-trash-alt"></i> Deletar
+              </button>
+            </form>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  
+</div>
